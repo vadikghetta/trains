@@ -59,14 +59,15 @@ export function createLoaders  (options : IWebpackOptions) : ModuleOptions["rule
   }
 //   вместо бабеля и ts-loader решил попробовать swc loader
   const swcLoader =  {
-      test: /\.tsx$/,
+      test: /\.(ts|tsx)$/,
       exclude: /(node_modules|bower_components)/,
       use: {
           loader: "swc-loader",
           options: {
               jsc: {
                   parser: {
-                      syntax: "typescript"
+                      syntax: "typescript",
+                      tsx: true,
                   },
                   transform : {
                     react : {
