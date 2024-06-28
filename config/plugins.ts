@@ -19,11 +19,11 @@ export function createPlugins ({mode, paths : {html, publicFolder, output}, anal
             favicon : path.resolve(publicFolder , "favicon.ico")
 
         }),
-        new CopyWebpackPlugin({
-            patterns: [
-              { from: path.resolve(publicFolder, "assets"), to: path.resolve(output, "assets") }
-            ],
-          }),
+        // new CopyWebpackPlugin({
+        //     patterns: [
+        //       { from: path.resolve(publicFolder, "assets"), to: path.resolve(output, "assets") }
+        //     ],
+        //   }),
           new ForkTsCheckerWebpackPlugin()
         
     ]
