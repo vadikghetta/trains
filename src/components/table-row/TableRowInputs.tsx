@@ -1,12 +1,18 @@
 import { ITrainsCharacteristic } from "@/types/trains.interfaces";
-import { useState } from "react";
+import { DetailedHTMLProps, HTMLAttributes, useState } from "react";
+import styles from "./TableRow.module.scss";
+import clsx from "clsx";
+
+interface ITableRowInputsProps extends DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement> {
+    data: ITrainsCharacteristic
+}
 
 
-const TableRowInputs = ({ data }: { data: ITrainsCharacteristic }) => {
+const TableRowInputs = ({ data, className, ...props }: ITableRowInputsProps) => {
     const [state, setState] = useState<ITrainsCharacteristic>({ ...data })
 
     return (
-        <>
+        <tr className={clsx(className, styles.row, styles.rowWithInputs)}  {...props}>
             <td>
                 <input type="number" value={state.engineAmperage} onChange={(e) => {
                     setState({ ...state, engineAmperage: +e.target.value })
@@ -20,7 +26,7 @@ const TableRowInputs = ({ data }: { data: ITrainsCharacteristic }) => {
             <td><input type="number" value={state.speed} onChange={(e) => {
                 setState({ ...state, speed: +e.target.value })
             }} /></td>
-        </>
+        </tr>
     )
 }
 

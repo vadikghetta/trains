@@ -22,22 +22,21 @@ interface ITableProps extends DetailedHTMLProps<HTMLAttributes<HTMLTableRowEleme
 
 const TableRow = ({ data, className, activeClass, ...props }: ITableProps) => {
     return (
-        <tr className={clsx(className, styles.row, {
-            [styles.activeRow]: activeClass,
-            [styles.rowWithInputs]: isCharacteristic(data)
-        })} {...props}>
+        <>
             {isTrain(data) ? (
-                <>
+                <tr className={clsx(className, styles.row, {
+                    [styles.activeRow]: activeClass
+                })} {...props}>
                     <td>{data.name}</td>
                     <td>{data.description}</td>
-                </>
+                </tr>
             ) : null}
             {isCharacteristic(data) ? (
                 <>
                     <TableRowInputs data={data} />
                 </>
             ) : null}
-        </tr>
+        </>
     )
 }
 
