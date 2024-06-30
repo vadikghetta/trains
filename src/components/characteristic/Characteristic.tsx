@@ -15,7 +15,7 @@ const headerTitles = ["Ток двигателя", "Сила тяги", "Ско�
 
 const Characteristic = ({ active }: ICharacteristicProps) => {
     const [state, setState] = useState<ITrainsRoot | null>(null);
-    const { trains: { data } } = useAppSelector(state => state);
+    const { data } = useAppSelector(state => state.trains);
     useEffect(() => {
         if (active || active === 0) {
             setState(data[active]);

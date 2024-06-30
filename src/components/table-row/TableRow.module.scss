@@ -19,10 +19,15 @@
         background: inherit;
          -webkit-appearance: none;
          -moz-appearance: textfield;
+         width: min-content;
+         text-align: center;
     }
     &:hover {
         background-color: inherit
     }
+}
+.rowError {
+    color: $error;
 }
 .activeRow {
     background-color: rgba($color: $ghost-light, $alpha: 0.4);

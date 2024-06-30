@@ -12,7 +12,7 @@ interface ITrainsListProps {
 const headerArr = ["Название", "Описание"];
 
 const TrainsList = ({ handleActiveTrain, active }: ITrainsListProps) => {
-    const { trains: { data } } = useAppSelector(state => state);
+    const { data } = useAppSelector(state => state.trains);
     return (
         <Box>
             <Heading tag="h2" with15Bottom>

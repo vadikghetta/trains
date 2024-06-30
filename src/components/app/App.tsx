@@ -11,7 +11,7 @@ import Characteristic from "../characteristic/Characteristic";
 
 
 const App = () => {
-    const { trains: { loading } } = useAppSelector(state => state);
+    const { loading } = useAppSelector(state => state.trains);
     const [activeTrain, setActiveTrain] = useState<null | number>(null);
     const dispatch = useAppDispatch()
     useEffect(() => {
