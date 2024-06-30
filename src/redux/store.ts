@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterSlice from "./slices/counterSlice";
+import trainsSlice from "./slices/trainsSlice";
+
 
 
 export const store = configureStore({
   reducer: {
-    counter : counterSlice
+    trains : trainsSlice
   }
 })
 

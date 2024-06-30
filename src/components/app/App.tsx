@@ -1,11 +1,19 @@
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Box from "../box/Box";
 import Heading from "../heading/Heading";
 import styles from "./App.module.scss"
+import { useEffect } from "react";
+import { fetchTrains } from "@/redux/slices/trainsSlice";
 
 
 
 const App = () => {
-
+    const trains = useAppSelector(state => state.trains);
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(fetchTrains());
+    }, [dispatch])
+    console.log(trains)
     return (
         <main className={styles.main}>
             <div className="container">

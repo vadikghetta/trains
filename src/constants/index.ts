@@ -1,0 +1,1 @@
+export const API = "https://617ee0342ff7e600174bd939.mockapi.io/trains";
