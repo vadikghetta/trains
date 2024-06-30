@@ -10,7 +10,7 @@ interface ITableProps extends DetailedHTMLProps<HTMLAttributes<HTMLTableElement>
 const Table = ({ headerTitles, data, className, ...props }: ITableProps) => {
     return (
         <table {...props} className={clsx(className, styles.table)}>
-            <thead >
+            <thead className={styles.header}>
                 <tr>
                     {headerTitles.map((el, index) => (
                         <th key={index}>

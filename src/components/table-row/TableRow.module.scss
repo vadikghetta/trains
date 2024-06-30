@@ -1,0 +1,19 @@
+@import "../../sass/variables";
+.row {
+    cursor: pointer;
+    color: $dark;
+    transition: all 0.2s linear;
+    &:not(:last-child) {
+        border-bottom: 1px solid $ghost;
+    }
+    &:hover {
+        background-color: rgba($color: $ghost-light, $alpha: 0.4);
+    }
+    td {
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+.activeRow {
+    background-color: rgba($color: $ghost-light, $alpha: 0.4);
+}

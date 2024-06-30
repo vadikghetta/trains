@@ -4,17 +4,29 @@ import Heading from "../heading/Heading"
 import Table from "../table/Table";
 import TableRow from "../table-row/TableRow";
 
-const headerArr = ["Название", "Описание"]
+interface ITrainsListProps {
+    handleActiveTrain(num: number): void
+    active: number | null
+}
 
-const TrainsList = () => {
+const headerArr = ["Название", "Описание"];
+
+const TrainsList = ({ handleActiveTrain, active }: ITrainsListProps) => {
     const { trains: { data } } = useAppSelector(state => state);
     return (
         <Box>
-            <Heading tag="h2">
+            <Heading tag="h2" with15Bottom>
                 Поезда
             </Heading>
-            <Table headerTitles={headerArr} data={data.map((item) => (
-                <TableRow data={item} key={item.name} />
+            <Table headerTitles={headerArr} data={data.map((item, index) => (
+                <TableRow
+                    activeClass={active && active === index}
+                    data={item}
+                    key={item.name}
+                    onClick={() => {
+                        handleActiveTrain(index)
+                    }}
+                />
             ))} />
         </Box>
     )

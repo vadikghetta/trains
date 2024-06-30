@@ -1,4 +1,16 @@
+@import "../../sass/variables";
 .table {
     border-collapse: collapse;
 	border-spacing: 0; 
+    width: 100%;
+}
+
+.header {
+    background-color: $ghost-light;
+    color: $ghost;
+    font-size: 16px;
+    th {
+        text-align: center;
+        padding: 15px 0;
+    }
 }

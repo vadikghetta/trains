@@ -1,11 +1,14 @@
 import { ITrainsCharacteristic, ITrainsRoot } from "@/types/trains.interfaces";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
+import styles from "./TableRow.module.scss";
+import clsx from "clsx";
 
 type TRowType = ITrainsRoot | ITrainsCharacteristic
 
 
 interface ITableProps extends DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement> {
     data: TRowType
+    activeClass?: boolean
 }
 
 const isTrain = (item: TRowType): item is ITrainsRoot => {
@@ -15,9 +18,11 @@ const isCharacteristic = (item: TRowType): item is ITrainsCharacteristic => {
     return "speed" in item
 }
 
-const TableRow = ({ data }: ITableProps) => {
+const TableRow = ({ data, className, activeClass, ...props }: ITableProps) => {
     return (
-        <tr>
+        <tr className={clsx(className, styles.row, {
+            [styles.activeRow]: activeClass
+        })} {...props}>
             {isTrain(data) ? (
                 <>
                     <td>{data.name}</td>
