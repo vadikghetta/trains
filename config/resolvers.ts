@@ -1,5 +1,5 @@
 import { Configuration } from "webpack";
-import { IWebpackOptions } from "../types/webpack.types";
+import { IWebpackOptions } from "../src/types/webpack.types";
 
 
 export function createResolvers  (option : IWebpackOptions) : Configuration["resolve"]{

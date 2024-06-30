@@ -1,7 +1,7 @@
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { Configuration} from "webpack";
-import { IWebpackOptions } from "../types/webpack.types";
+import { IWebpackOptions } from "../src/types/webpack.types";
 import webpack from "webpack";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import CopyWebpackPlugin  from "copy-webpack-plugin"

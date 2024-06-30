@@ -1,6 +1,6 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { ModuleOptions } from "webpack";
-import { IWebpackOptions } from "../types/webpack.types";
+import { IWebpackOptions } from "../src/types/webpack.types";
 
 
 

@@ -1,6 +1,6 @@
 
 import {Configuration as DevServerConfiguration} from "webpack-dev-server";
-import { IWebpackOptions } from "../types/webpack.types";
+import { IWebpackOptions } from "../src/types/webpack.types";
 
 
 export function createDevServer  (options : IWebpackOptions): DevServerConfiguration  {

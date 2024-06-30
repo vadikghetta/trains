@@ -1,6 +1,6 @@
 
 import webpack from "webpack";
-import { IWebpackOptions } from "../types/webpack.types";
+import { IWebpackOptions } from "../src/types/webpack.types";
 import { createDevServer } from "./server";
 import { createPlugins } from "./plugins";
 import { createLoaders } from "./loaders";

@@ -1,6 +1,6 @@
 import path from "path"
 import webpack from "webpack";
-import { IWebpackPaths, IEnvVarsType } from "./types/webpack.types";
+import { IWebpackPaths, IEnvVarsType } from "./src/types/webpack.types";
 import {buildWebpack} from "./config/build_webpack";
 
 
