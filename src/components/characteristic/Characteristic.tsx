@@ -12,12 +12,14 @@ interface ICharacteristicProps {
 }
 const headerTitles = ["Ток двигателя", "Сила тяги", "Скорость"];
 
+
 const Characteristic = ({ active }: ICharacteristicProps) => {
     const [state, setState] = useState<ITrainsRoot | null>(null);
     const { trains: { data } } = useAppSelector(state => state);
     useEffect(() => {
         if (active || active === 0) {
             setState(data[active]);
+
         }
     }, [active])
     return (
@@ -33,7 +35,10 @@ const Characteristic = ({ active }: ICharacteristicProps) => {
                     <Table
                         headerTitles={headerTitles}
                         data={state.characteristics.map((item, index) => (
-                            <TableRow key={index} data={item} />
+                            <TableRow
+                                key={index}
+                                data={item}
+                            />
                         ))}
                     />
 

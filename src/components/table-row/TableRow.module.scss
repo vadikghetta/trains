@@ -14,6 +14,16 @@
         padding: 10px 0;
     }
 }
+.rowWithInputs {
+    input {
+        background: inherit;
+         -webkit-appearance: none;
+         -moz-appearance: textfield;
+    }
+    &:hover {
+        background-color: inherit
+    }
+}
 .activeRow {
     background-color: rgba($color: $ghost-light, $alpha: 0.4);
 }
