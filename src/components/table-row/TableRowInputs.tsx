@@ -14,7 +14,7 @@ interface IErrorStatus {
 }
 
 const checkValueMoreZero = (val: string, key: keyof IErrorStatus, setState: React.Dispatch<SetStateAction<IErrorStatus>>) => {
-    if (!isNaN(+val)) {
+    if (!Number(val) || Number(val) < 0 || !Number.isInteger(Number(val)) || String(val).includes('.')) {
         setState(state => {
             return {
                 ...state,
@@ -22,7 +22,23 @@ const checkValueMoreZero = (val: string, key: keyof IErrorStatus, setState: Reac
             }
         })
     } else {
-        console.log("here")
+        setState(state => {
+            return {
+                ...state,
+                [key]: false
+            }
+        })
+    }
+}
+const checkWithFloat = (val: string, key: keyof IErrorStatus, setState: React.Dispatch<SetStateAction<IErrorStatus>>) => {
+    if (!Number(val) || Number(val) < 0 || !/^[0-9]*[.,][0-9]+$/.test(val)) {
+        setState(state => {
+            return {
+                ...state,
+                [key]: true
+            }
+        })
+    } else {
         setState(state => {
             return {
                 ...state,
@@ -32,6 +48,7 @@ const checkValueMoreZero = (val: string, key: keyof IErrorStatus, setState: Reac
     }
 }
 
+
 const TableRowInputs = ({ data, className, ...props }: ITableRowInputsProps) => {
     const [state, setState] = useState<ITrainsCharacteristic>({ ...data });
     const [error, setError] = useState<IErrorStatus>({
@@ -40,13 +57,11 @@ const TableRowInputs = ({ data, className, ...props }: ITableRowInputsProps) => 
         speed: false
     });
 
-    console.log(error)
-
     return (
         <tr className={clsx(className, styles.row, styles.rowWithInputs)}  {...props}>
             <td>
                 <input
-                    type="number"
+                    type="text"
                     onChange={(e) => {
                         setState({ ...state, engineAmperage: e.target.value })
                         checkValueMoreZero(e.target.value, "engineAmperage", setError)
@@ -59,10 +74,10 @@ const TableRowInputs = ({ data, className, ...props }: ITableRowInputsProps) => 
             </td>
             <td>
                 <input
-                    type="number"
+                    type="text"
                     onChange={(e) => {
                         setState({ ...state, force: e.target.value })
-                        checkValueMoreZero(e.target.value, "force", setError)
+                        checkWithFloat(e.target.value, "force", setError)
                     }}
                     className={clsx({
                         [styles.rowError]: error.force
@@ -75,7 +90,7 @@ const TableRowInputs = ({ data, className, ...props }: ITableRowInputsProps) => 
                     className={clsx({
                         [styles.rowError]: error.speed
                     })}
-                    type="number"
+                    type="text"
                     onChange={(e) => {
                         setState({ ...state, speed: e.target.value })
                         checkValueMoreZero(e.target.value, "speed", setError)
