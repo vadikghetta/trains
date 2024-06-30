@@ -1,8 +1,9 @@
 import { ITrainsCharacteristic } from "@/types/trains.interfaces";
-import { DetailedHTMLProps, HTMLAttributes, SetStateAction, useState } from "react";
+import { DetailedHTMLProps, HTMLAttributes, SetStateAction, useCallback, useEffect, useState } from "react";
 import styles from "./TableRow.module.scss";
 import clsx from "clsx";
-import { Dispatch } from "@reduxjs/toolkit";
+import { useAppDispatch } from "@/redux/hooks";
+import { editPreventFormSubmission } from "@/redux/slices/trainsSlice";
 
 interface ITableRowInputsProps extends DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement> {
     data: ITrainsCharacteristic
@@ -51,25 +52,34 @@ const checkWithFloat = (val: string, key: keyof IErrorStatus, setState: React.Di
 
 const TableRowInputs = ({ data, className, ...props }: ITableRowInputsProps) => {
     const [state, setState] = useState<ITrainsCharacteristic>({ ...data });
+    const dispatch = useAppDispatch();
     const [error, setError] = useState<IErrorStatus>({
         engineAmperage: false,
         force: false,
         speed: false
     });
+    const checkError = () => {
+        if (Object.values(error).every(el => !el)) {
+            dispatch(editPreventFormSubmission(false))
+        } else {
+            dispatch(editPreventFormSubmission(true))
+        }
+    }
+
 
     return (
         <tr className={clsx(className, styles.row, styles.rowWithInputs)}  {...props}>
             <td>
                 <input
                     type="text"
-                    onChange={(e) => {
-                        setState({ ...state, engineAmperage: e.target.value })
-                        checkValueMoreZero(e.target.value, "engineAmperage", setError)
-                    }}
                     value={state.engineAmperage}
                     className={clsx({
                         [styles.rowError]: error.engineAmperage
                     })}
+                    onChange={(e) => {
+                        setState({ ...state, engineAmperage: e.target.value })
+                        checkValueMoreZero(e.target.value, "engineAmperage", setError)
+                    }}
                 />
             </td>
             <td>

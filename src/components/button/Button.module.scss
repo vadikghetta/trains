@@ -1,0 +1,16 @@
+@import "../../sass/variables";
+
+.button {
+    border: 1px solid $dark;
+    border-radius: 10px;
+    cursor: pointer;
+    color: $dark;
+    text-align: center;
+    background-color: $light;
+    padding: 10px 15px;
+    &:disabled {
+        cursor: not-allowed;
+        background-color: $ghost-light;
+        color: $ghost;
+    }
+}

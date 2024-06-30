@@ -1,7 +1,7 @@
 import { getTrains } from '@/services'
 import { TLoadingStatus } from '@/types/general.types';
 import { ITrainsRoot } from '@/types/trains.interfaces';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 
 
@@ -16,11 +16,13 @@ export const fetchTrains = createAsyncThunk(
 interface ITrainsState {
   data : ITrainsRoot[]
   loading: TLoadingStatus
+  preventFormSubmission : boolean
 }
 
 const initialState = {
   data: [],
   loading: 'idle',
+  preventFormSubmission : false
 } satisfies ITrainsState as ITrainsState
 
 // Then, handle actions in your reducers:
@@ -28,7 +30,9 @@ const trainsSlice = createSlice({
   name: 'trains',
   initialState,
   reducers: {
-    
+    editPreventFormSubmission : (state , action : PayloadAction<boolean>) => {
+      state.preventFormSubmission = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTrains.pending, (state, action) => {
@@ -44,5 +48,5 @@ const trainsSlice = createSlice({
   },
 })
 
-
+export const {editPreventFormSubmission} = trainsSlice.actions;
 export default trainsSlice.reducer;

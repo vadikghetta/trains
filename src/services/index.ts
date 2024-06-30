@@ -1,5 +1,6 @@
 import { API } from "@/constants";
 import { ITrainsRoot } from "@/types/trains.interfaces";
+import { SyntheticEvent } from "react";
 
 export const getTrains = async () : Promise<ITrainsRoot[] | void> => {
     try {
@@ -8,4 +9,8 @@ export const getTrains = async () : Promise<ITrainsRoot[] | void> => {
     }catch(e) {
         console.log(e)
     }
+}
+
+export const submitForm = (e: SyntheticEvent) => {
+    e.preventDefault();
 }

@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Box from "../box/Box";
 import Heading from "../heading/Heading";
 import { ITrainsRoot } from "@/types/trains.interfaces";
 import { useAppSelector } from "@/redux/hooks";
 import Table from "../table/Table";
 import TableRow from "../table-row/TableRow";
+import Button from "../button/Button";
+import styles from "./styles.module.scss";
+import { submitForm } from "@/services";
 
 
 interface ICharacteristicProps {
@@ -13,9 +16,9 @@ interface ICharacteristicProps {
 const headerTitles = ["Ток двигателя", "Сила тяги", "Скорость"];
 
 
-const Characteristic = ({ active }: ICharacteristicProps) => {
+const Characteristic = memo(({ active }: ICharacteristicProps) => {
     const [state, setState] = useState<ITrainsRoot | null>(null);
-    const { data } = useAppSelector(state => state.trains);
+    const { data, preventFormSubmission } = useAppSelector(state => state.trains);
     useEffect(() => {
         if (active || active === 0) {
             setState(data[active]);
@@ -28,7 +31,9 @@ const Characteristic = ({ active }: ICharacteristicProps) => {
                 Характеристики
             </Heading>
             {state ? (
-                <>
+                <form onSubmit={(e) => {
+                    submitForm(e)
+                }}>
                     <Heading tag="h3" with15Bottom>
                         {state.name}
                     </Heading>
@@ -36,13 +41,17 @@ const Characteristic = ({ active }: ICharacteristicProps) => {
                         headerTitles={headerTitles}
                         data={state.characteristics.map((item, index) => (
                             <TableRow
-                                key={index}
+                                key={new Date().getTime() + index}
                                 data={item}
                             />
                         ))}
                     />
-
-                </>
+                    <div className={styles.submit}>
+                        <Button disabled={preventFormSubmission}>
+                            Отправить данные
+                        </Button>
+                    </div>
+                </form>
             ) : (
                 <Heading tag="h3" with15Bottom>
                     Выберете поезд
@@ -50,6 +59,6 @@ const Characteristic = ({ active }: ICharacteristicProps) => {
             )}
         </Box>
     )
-}
+})
 
 export default Characteristic;
