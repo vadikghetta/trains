@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import Box from "../box/Box";
 import Heading from "../heading/Heading";
 import styles from "./App.module.scss"
 import { useEffect, useState } from "react";
@@ -23,23 +22,21 @@ const App = () => {
     }
     return (
         <main className={styles.main}>
-            <div className="container">
-                <Heading tag="h1" className={styles.title}>
-                    Поезда
-                </Heading>
-                {loading === "pending" ? <Loader /> : null}
-                {loading === "succeeded" ? (
-                    <div className={styles.inner}>
-                        <TrainsList
-                            handleActiveTrain={handleActiveTrain}
-                            active={activeTrain}
-                        />
-                        <Characteristic active={activeTrain} />
-                    </div>
-                ) : null}
-                {loading === "failed" ? <Heading tag="h2">Произошла ошибка</Heading> : null}
-            </div>
 
+            <Heading tag="h1" className={styles.title}>
+                Поезда
+            </Heading>
+            {loading === "pending" ? <Loader /> : null}
+            {loading === "succeeded" ? (
+                <div className={styles.inner}>
+                    <TrainsList
+                        handleActiveTrain={handleActiveTrain}
+                        active={activeTrain}
+                    />
+                    <Characteristic active={activeTrain} />
+                </div>
+            ) : null}
+            {loading === "failed" ? <Heading tag="h2">Произошла ошибка</Heading> : null}
         </main>
     )
 }

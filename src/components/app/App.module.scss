@@ -2,10 +2,15 @@
 
 
 .main {
-    width: 100%;
     min-height: 100vh;
-    background-color: $ghost-light;
     padding: 50px 0 ;
+    width: 100%;
+    max-width: 1430px;
+	margin: 0 auto;
+    @media screen and (max-width : 1476px) {
+        max-width: 100%;
+        padding: 50px 20px;   
+    }
 }
 
 .title {
@@ -14,6 +19,9 @@
 }
 .inner {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 30% 1fr;
     gap: 30px;
+    @media screen and (max-width : 1000px) {
+        grid-template-columns: 1fr;
+    }
 }
