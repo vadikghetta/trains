@@ -26,6 +26,7 @@ const Characteristic = memo(({ active }: ICharacteristicProps) => {
 
         }
     }, [active])
+
     return (
         <Box>
             <Heading tag="h2" with15Bottom>
@@ -33,6 +34,9 @@ const Characteristic = memo(({ active }: ICharacteristicProps) => {
             </Heading>
             {state ? (
                 <form onSubmit={(e) => {
+                    if (preventFormSubmission) {
+                        return
+                    }
                     submitForm(e)
                 }}>
                     <Heading tag="h3" with15Bottom>

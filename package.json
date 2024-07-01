@@ -3,10 +3,13 @@
     "version": "1.0.0",
     "description": "react train task",
     "main": "index.js",
+    "homepage": "https://vadikghetta.github.io/trains",
     "scripts": {
         "start": "webpack serve --env mode=development",
         "dev": "webpack --env mode=development",
-        "build": "webpack --env mode=production"
+        "build": "webpack --env mode=production",
+        "predeploy" : "npm run build",
+        "deploy": "gh-pages -d build"
     },
     "author": "Vadim",
     "license": "ISC",
