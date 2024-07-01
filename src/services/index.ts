@@ -11,6 +11,12 @@ export const getTrains = async () : Promise<ITrainsRoot[] | void> => {
     }
 }
 
-export const submitForm = (e: SyntheticEvent) => {
+export const submitForm = (e: SyntheticEvent, data : ITrainsRoot) => {
     e.preventDefault();
+    const arr = data.characteristics.map(el => {
+        return {
+            speed : el.speed
+        }
+    })
+    console.log(arr)
 }

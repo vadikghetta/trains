@@ -34,10 +34,10 @@ const Characteristic = memo(({ active }: ICharacteristicProps) => {
             </Heading>
             {state ? (
                 <form onSubmit={(e) => {
-                    if (preventFormSubmission) {
+                    if (preventFormSubmission || !state) {
                         return
                     }
-                    submitForm(e)
+                    submitForm(e, state)
                 }}>
                     <Heading tag="h3" with15Bottom>
                         {state.name}
