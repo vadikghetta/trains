@@ -3,7 +3,7 @@ import { DetailedHTMLProps, HTMLAttributes, SetStateAction, useCallback, useEffe
 import styles from "./TableRow.module.scss";
 import clsx from "clsx";
 import { useAppDispatch } from "@/redux/hooks";
-import { editPreventFormSubmission } from "@/redux/slices/trainsSlice";
+import { editPreventFormSubmission } from "@/redux/slices/errorSlice";
 
 interface ITableRowInputsProps extends DetailedHTMLProps<HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement> {
     data: ITrainsCharacteristic
@@ -15,7 +15,7 @@ interface IErrorStatus {
 }
 
 const checkValueMoreZero = (val: string, key: keyof IErrorStatus, setState: React.Dispatch<SetStateAction<IErrorStatus>>) => {
-    if (!Number(val) || Number(val) < 0 || !Number.isInteger(Number(val)) || String(val).includes('.')) {
+    if (!Number(val) || Number(val) < 0 || String(val).includes('.') || !Number.isInteger(Number(val))) {
         setState(state => {
             return {
                 ...state,
@@ -32,7 +32,7 @@ const checkValueMoreZero = (val: string, key: keyof IErrorStatus, setState: Reac
     }
 }
 const checkWithFloat = (val: string, key: keyof IErrorStatus, setState: React.Dispatch<SetStateAction<IErrorStatus>>) => {
-    if (!Number(val) || Number(val) < 0 || !/^[0-9]*[.,][0-9]+$/.test(val)) {
+    if (!Number(val) || !/^[0-9]*[.,][0-9]+$/.test(val)) {
         setState(state => {
             return {
                 ...state,
@@ -65,7 +65,13 @@ const TableRowInputs = ({ data, className, ...props }: ITableRowInputsProps) => 
             dispatch(editPreventFormSubmission(true))
         }
     }
+    const catchError = useCallback(() => {
+        checkError()
+    }, [error, dispatch])
 
+    useEffect(() => {
+        catchError()
+    }, [catchError])
 
     return (
         <tr className={clsx(className, styles.row, styles.rowWithInputs)}  {...props}>

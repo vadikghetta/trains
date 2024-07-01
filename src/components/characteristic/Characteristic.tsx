@@ -18,7 +18,8 @@ const headerTitles = ["Ток двигателя", "Сила тяги", "Ско�
 
 const Characteristic = memo(({ active }: ICharacteristicProps) => {
     const [state, setState] = useState<ITrainsRoot | null>(null);
-    const { data, preventFormSubmission } = useAppSelector(state => state.trains);
+    const { data } = useAppSelector(state => state.trains);
+    const { preventFormSubmission } = useAppSelector(state => state.errors);
     useEffect(() => {
         if (active || active === 0) {
             setState(data[active]);
@@ -41,7 +42,7 @@ const Characteristic = memo(({ active }: ICharacteristicProps) => {
                         headerTitles={headerTitles}
                         data={state.characteristics.map((item, index) => (
                             <TableRow
-                                key={new Date().getTime() + index}
+                                key={(`${state.name + index}`)}
                                 data={item}
                             />
                         ))}
